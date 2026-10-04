@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Order Successful</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+        }
+
+        nav {
+            background: #2563eb;
+            color: white;
+            padding: 18px 40px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav h2 {
+            font-size: 24px;
+        }
+
+        .success-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .success-box {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+
+            box-shadow:
+                0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .success-icon {
+            font-size: 70px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            color: #16a34a;
+            margin-bottom: 10px;
+        }
+
+        .customer {
+            margin-top: 30px;
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+        }
+
+        .customer p {
+            margin: 10px 0;
+        }
+
+        .items {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .total {
+            margin-top: 20px;
+            text-align: right;
+
+            font-size: 22px;
+            font-weight: bold;
+
+            color: #2563eb;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .home-btn {
+            display: inline-block;
+            margin-top: 30px;
+
+            padding: 13px 25px;
+
+            background: #2563eb;
+            color: white;
+
+            text-decoration: none;
+            border-radius: 7px;
+        }
+
+        .home-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .track-btn {
+            background: #16a34a;
+        }
+
+        .track-btn:hover {
+            background: #15803d;
+        }
+
+        .payment {
+            margin-top: 15px;
+            padding: 12px;
+
+            background: #e0f2fe;
+            border-radius: 7px;
+
+            color: #0369a1;
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+
+            nav {
+                padding: 15px 20px;
+            }
+
+            nav h2 {
+                font-size: 19px;
+            }
+
+            .success-container {
+                margin: 20px auto;
+                padding: 10px;
+            }
+
+            .success-box {
+                padding: 25px 18px;
+            }
+
+            .item {
+                font-size: 14px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- Navigation -->
+
+    <nav>
+
+        <h2>
+            🛒 Online Shop
+        </h2>
+
+    </nav>
+
+
+
+    <!-- Success Container -->
+
+    <div class="success-container">
+
+        <div class="success-box">
+
+
+            <!-- Success Icon -->
+
+            <div class="success-icon">
+                ✅
+            </div>
+
+
+            <h1>
+                Order Placed Successfully!
+            </h1>
+
+
+            <p>
+                Thank you for your order.
+            </p>
+
+
+
+            <!-- Customer Information -->
+
+            <div class="customer">
+
+                <h2>
+                    Customer Information
+                </h2>
+
+
+                <p>
+
+                    <strong>
+                        Name:
+                    </strong>
+
+                    <span id="customerName"></span>
+
+                </p>
+
+
+                <p>
+
+                    <strong>
+                        Phone:
+                    </strong>
+
+                    <span id="customerPhone"></span>
+
+                </p>
+
+
+                <p>
+
+                    <strong>
+                        Address:
+                    </strong>
+
+                    <span id="customerAddress"></span>
+
+                </p>
+
+
+                <!-- Payment Method -->
+
+                <div class="payment">
+
+                    💳 Payment Method:
+
+                    <span id="paymentMethod">
+                        -
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Order Items -->
+
+            <div class="items">
+
+                <h2>
+                    Your Order
+                </h2>
+
+
+                <div id="orderItems"></div>
+
+
+                <div class="total">
+
+                    Total:
+
+                    <span id="orderTotal">
+                        0
+                    </span>
+
+                    ETB
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Buttons -->
+
+            <div class="buttons">
+
+
+                <!-- Track Order -->
+
+                <a
+                    href="track-order.html"
+                    class="home-btn track-btn">
+
+                    📦 Track My Order
+
+                </a>
+
+
+                <!-- Continue Shopping -->
+
+                <a
+                    href="shop.html"
+                    class="home-btn">
+
+                    🛍️ Continue Shopping
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+
+        /*
+        ==========================================
+        GET LAST ORDER
+        ==========================================
+        */
+
+        let order =
+
+            JSON.parse(
+                localStorage.getItem(
+                    "lastOrder"
+                )
+            );
+
+
+
+        /*
+        ==========================================
+        CHECK ORDER
+        ==========================================
+        */
+
+        if (order) {
+
+
+            /*
+            Customer Name
+            */
+
+            document.getElementById(
+                "customerName"
+            ).innerText =
+
+                order.name;
+
+
+
+            /*
+            Customer Phone
+            */
+
+            document.getElementById(
+                "customerPhone"
+            ).innerText =
+
+                order.phone;
+
+
+
+            /*
+            Customer Address
+            */
+
+            document.getElementById(
+                "customerAddress"
+            ).innerText =
+
+                order.address;
+
+
+
+            /*
+            Payment Method
+            */
+
+            document.getElementById(
+                "paymentMethod"
+            ).innerText =
+
+                order.paymentMethod ||
+
+                "Cash on Delivery";
+
+
+
+            /*
+            Order Items
+            */
+
+            let items =
+
+                document.getElementById(
+                    "orderItems"
+                );
+
+
+            items.innerHTML = "";
+
+
+
+            if (
+                order.items &&
+                order.items.length > 0
+            ) {
+
+                order.items.forEach(
+                    function(item) {
+
+
+                        /*
+                        Quantity
+                        */
+
+                        let quantity =
+
+                            Number(
+                                item.quantity
+                            ) || 1;
+
+
+
+                        /*
+                        Item Total
+                        */
+
+                        let itemTotal =
+
+                            Number(
+                                item.price
+                            ) * quantity;
+
+
+
+                        /*
+                        Display Item
+                        */
+
+                        items.innerHTML += `
+
+                            <div class="item">
+
+                                <span>
+
+                                    ${item.name}
+
+                                    × ${quantity}
+
+                                </span>
+
+
+                                <strong>
+
+                                    ${itemTotal
+                                        .toLocaleString()}
+
+                                    ETB
+
+                                </strong>
+
+                            </div>
+
+                        `;
+
+                    }
+                );
+
+            }
+
+
+
+            /*
+            Total
+            */
+
+            document.getElementById(
+                "orderTotal"
+            ).innerText =
+
+                Number(
+                    order.total
+                ).toLocaleString();
+
+        }
+
+
+        else {
+
+
+            /*
+            No Order
+            */
+
+            document.querySelector(
+                ".success-box"
+            ).innerHTML = `
+
+                <div class="success-icon">
+                    ⚠️
+                </div>
+
+                <h1 style="color:#dc2626;">
+                    No Order Found
+                </h1>
+
+                <p>
+                    There is no recent order.
+                </p>
+
+                <a
+                    href="shop.html"
+                    class="home-btn">
+
+                    🛍️ Go to Shop
+
+                </a>
+
+            `;
+
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>

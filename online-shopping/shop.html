@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Online Shopping</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+        }
+
+        /* Navbar */
+
+        nav {
+            background: #2563eb;
+            color: white;
+
+            padding: 18px 40px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav h2 {
+            font-size: 24px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        /* LOGOUT BUTTON */
+
+        .logout-btn {
+            background: #dc2626;
+            color: white;
+
+            border: none;
+            padding: 9px 16px;
+
+            border-radius: 6px;
+
+            font-size: 15px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin-left: 20px;
+        }
+
+        .logout-btn:hover {
+            background: #b91c1c;
+        }
+
+        /* Hero */
+
+        .hero {
+            background: white;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .hero h1 {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            color: #666;
+            font-size: 18px;
+        }
+
+        /* Products */
+
+        .products-section {
+            padding: 40px;
+        }
+
+        .products-section h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
+
+        .product {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .product-image {
+            font-size: 70px;
+            margin-bottom: 15px;
+        }
+
+        .product h3 {
+            margin-bottom: 10px;
+        }
+
+        .price {
+            color: #2563eb;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .product button {
+            background: #2563eb;
+            color: white;
+
+            border: none;
+            padding: 10px 20px;
+
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .product button:hover {
+            background: #1d4ed8;
+        }
+
+        /* Footer */
+
+        footer {
+            margin-top: 40px;
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+
+    <nav>
+
+        <h2>🛒 Online Shop</h2>
+
+        <div>
+
+            <a href="shop.html">Home</a>
+
+            <a href="#">Products</a>
+
+            <a href="cart.html">Cart 🛒</a>
+
+            <!-- LOGOUT BUTTON -->
+
+            <button
+                class="logout-btn"
+                onclick="logout()">
+
+                🚪 Logout
+
+            </button>
+
+        </div>
+
+    </nav>
+
+
+    <!-- Hero -->
+
+    <section class="hero">
+
+        <h1>
+            Welcome to Our Online Shop 🛍️
+        </h1>
+
+        <p>
+            Find the best products at the best prices.
+        </p>
+
+    </section>
+
+
+    <!-- Products -->
+
+    <section class="products-section">
+
+        <h2>Our Products</h2>
+
+        <div class="products">
+
+
+            <!-- Product 1 -->
+
+            <div class="product">
+
+                <div class="product-image">
+                    📱
+                </div>
+
+                <h3>
+                    Smart Phone
+                </h3>
+
+                <p class="price">
+                    15,000 ETB
+                </p>
+
+                <button
+                    onclick="addToCart('Smart Phone', 15000)">
+
+                    Add to Cart
+
+                </button>
+
+            </div>
+
+
+            <!-- Product 2 -->
+
+            <div class="product">
+
+                <div class="product-image">
+                    💻
+                </div>
+
+                <h3>
+                    Laptop
+                </h3>
+
+                <p class="price">
+                    100,000 ETB
+                </p>
+
+                <button
+                    onclick="addToCart('Laptop', 100000)">
+
+                    Add to Cart
+
+                </button>
+
+            </div>
+
+
+            <!-- Product 3 -->
+
+            <div class="product">
+
+                <div class="product-image">
+                    🎧
+                </div>
+
+                <h3>
+                    Headphones
+                </h3>
+
+                <p class="price">
+                    2,000 ETB
+                </p>
+
+                <button
+                    onclick="addToCart('Headphones', 2000)">
+
+                    Add to Cart
+
+                </button>
+
+            </div>
+
+
+            <!-- Product 4 -->
+
+            <div class="product">
+
+                <div class="product-image">
+                    ⌚
+                </div>
+
+                <h3>
+                    Smart Watch
+                </h3>
+
+                <p class="price">
+                    3,500 ETB
+                </p>
+
+                <button
+                    onclick="addToCart('Smart Watch', 3500)">
+
+                    Add to Cart
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        <p>
+            © 2026 Online Shopping. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <script>
+
+        /* ADD TO CART */
+
+        function addToCart(name, price) {
+
+            let cart =
+                JSON.parse(
+                    localStorage.getItem("cart")
+                ) || [];
+
+            cart.push({
+                name: name,
+                price: price
+            });
+
+            localStorage.setItem(
+                "cart",
+                JSON.stringify(cart)
+            );
+
+            alert(
+                name + " added to cart! 🛒"
+            );
+        }
+
+
+        /* LOGOUT */
+
+        function logout() {
+
+            localStorage.removeItem("loggedIn");
+
+            localStorage.removeItem("userEmail");
+
+            localStorage.removeItem("adminLoggedIn");
+
+            alert(
+                "You have been logged out! 👋"
+            );
+
+            window.location.href =
+                "login.html";
+        }
+
+    </script>
+
+</body>
+
+</html>

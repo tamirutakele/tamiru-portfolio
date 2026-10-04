@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Online Shopping - Login</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+
+            background: linear-gradient(
+                135deg,
+                #2563eb,
+                #7c3aed
+            );
+
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        /* ADMIN BUTTON */
+
+        .top-admin {
+            position: fixed;
+
+            top: 20px;
+            right: 30px;
+
+            background: green;
+            color: white;
+
+            padding: 10px 18px;
+
+            border: none;
+            border-radius: 8px;
+
+            font-size: 17px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            z-index: 1000;
+        }
+
+
+        .top-admin:hover {
+            background: darkgreen;
+            transform: scale(1.05);
+        }
+
+
+        /* LOGIN BOX */
+
+        .login-container {
+
+            width: 380px;
+
+            background: white;
+
+            padding: 35px;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.25);
+        }
+
+
+        /* LOGO */
+
+        .logo {
+
+            text-align: center;
+
+            font-size: 40px;
+
+            margin-bottom: 10px;
+        }
+
+
+        h1 {
+
+            text-align: center;
+
+            margin-bottom: 8px;
+
+            color: #222;
+        }
+
+
+        .subtitle {
+
+            text-align: center;
+
+            color: #777;
+
+            margin-bottom: 25px;
+        }
+
+
+        /* LABEL */
+
+        label {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            font-weight: bold;
+
+            color: #333;
+        }
+
+
+        /* INPUT */
+
+        input {
+
+            width: 100%;
+
+            padding: 13px;
+
+            margin-bottom: 5px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 7px;
+
+            font-size: 15px;
+        }
+
+
+        input:focus {
+
+            outline: none;
+
+            border-color: #2563eb;
+        }
+
+
+        /* DYNAMIC ERROR */
+
+        .error {
+
+            color: red;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            margin-top: 4px;
+
+            margin-bottom: 12px;
+
+            min-height: 15px;
+        }
+
+
+        /* LOGIN BUTTON */
+
+        .login-btn {
+
+            width: 100%;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 7px;
+
+            background: #2563eb;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin-top: 3px;
+        }
+
+
+        .login-btn:hover {
+
+            background: #1d4ed8;
+        }
+
+
+        /* LOGIN MESSAGE */
+
+        #message {
+
+            text-align: center;
+
+            margin-top: 15px;
+
+            font-weight: bold;
+        }
+
+
+        /* DEMO ACCOUNT */
+
+        .demo {
+
+            margin-top: 20px;
+
+            padding: 12px;
+
+            background: #f3f4f6;
+
+            border-radius: 7px;
+
+            text-align: center;
+
+            font-size: 13px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ADMIN LOGIN BUTTON -->
+
+    <button
+        class="top-admin"
+        onclick="adminLogin()">
+
+        👨‍💼 Admin Login
+
+    </button>
+
+
+
+    <!-- CUSTOMER LOGIN -->
+
+    <div class="login-container">
+
+
+        <div class="logo">
+            🛒
+        </div>
+
+
+        <h1>
+            Online Shopping
+        </h1>
+
+
+        <p class="subtitle">
+            Login to your account
+        </p>
+
+
+
+        <!-- LOGIN FORM -->
+
+        <form onsubmit="login(event)">
+
+
+            <!-- EMAIL -->
+
+            <label for="email">
+                Email
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Please enter your email"
+                oninput="emailTyping()"
+            >
+
+            <p
+                id="emailError"
+                class="error">
+            </p>
+
+
+
+            <!-- PASSWORD -->
+
+            <label for="password">
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Please enter your password"
+                oninput="passwordTyping()"
+            >
+
+            <p
+                id="passwordError"
+                class="error">
+            </p>
+
+
+
+            <!-- CUSTOMER LOGIN -->
+
+            <button
+                class="login-btn"
+                type="submit">
+
+                Customer Login
+
+            </button>
+
+
+            <p id="message"></p>
+
+
+        </form>
+
+
+
+        <!-- DEMO ACCOUNT -->
+
+        <div class="demo">
+
+            <strong>
+                Demo Customer Account
+            </strong>
+
+            <br><br>
+
+            Email:
+            demo@gmail.com
+
+            <br>
+
+            Password:
+            12345
+
+        </div>
+
+
+    </div>
+
+
+
+    <script>
+
+
+        /* =========================
+           CUSTOMER LOGIN
+        ========================= */
+
+        function login(event) {
+
+            event.preventDefault();
+
+
+            let email =
+                document.getElementById("email").value.trim();
+
+
+            let password =
+                document.getElementById("password").value;
+
+
+            let emailError =
+                document.getElementById("emailError");
+
+
+            let passwordError =
+                document.getElementById("passwordError");
+
+
+            let message =
+                document.getElementById("message");
+
+
+            /* CLEAR OLD MESSAGE */
+
+            emailError.innerText = "";
+
+            passwordError.innerText = "";
+
+            message.innerText = "";
+
+
+            /* CHECK EMAIL */
+
+            if (email === "") {
+
+                emailError.innerText =
+                    "Please enter your email";
+
+            }
+
+
+            /* CHECK PASSWORD */
+
+            if (password === "") {
+
+                passwordError.innerText =
+                    "Please enter your password";
+
+            }
+
+
+            /* STOP IF EMPTY */
+
+            if (
+                email === "" ||
+                password === ""
+            ) {
+
+                return;
+            }
+
+
+            /* CHECK CUSTOMER ACCOUNT */
+
+            if (
+                email === "demo@gmail.com" &&
+                password === "12345"
+            ) {
+
+                message.style.color =
+                    "green";
+
+                message.innerText =
+                    "Login successful!";
+
+
+                localStorage.setItem(
+                    "loggedIn",
+                    "true"
+                );
+
+
+                localStorage.setItem(
+                    "userEmail",
+                    email
+                );
+
+
+                setTimeout(function() {
+
+                    window.location.href =
+                        "shop.html";
+
+                }, 500);
+
+
+            } else {
+
+                message.style.color =
+                    "red";
+
+                message.innerText =
+                    "Invalid email or password!";
+
+            }
+
+        }
+
+
+
+        /* =========================
+           EMAIL DYNAMIC MESSAGE
+        ========================= */
+
+        function emailTyping() {
+
+            let email =
+                document.getElementById("email").value;
+
+
+            if (email !== "") {
+
+                document.getElementById(
+                    "emailError"
+                ).innerText = "";
+
+            }
+
+        }
+
+
+
+        /* =========================
+           PASSWORD DYNAMIC MESSAGE
+        ========================= */
+
+        function passwordTyping() {
+
+            let password =
+                document.getElementById("password").value;
+
+
+            if (password !== "") {
+
+                document.getElementById(
+                    "passwordError"
+                ).innerText = "";
+
+            }
+
+        }
+
+
+
+        /* =========================
+           ADMIN LOGIN
+        ========================= */
+
+        function adminLogin() {
+
+            let email =
+                prompt("Enter Admin Email:");
+
+
+            if (email === null) {
+                return;
+            }
+
+
+            let password =
+                prompt("Enter Admin Password:");
+
+
+            if (password === null) {
+                return;
+            }
+
+
+            if (
+                email === "tame@gmail.com" &&
+                password === "tamex@.1221"
+            ) {
+
+                localStorage.setItem(
+                    "adminLoggedIn",
+                    "true"
+                );
+
+
+                alert(
+                    "Admin Login Successful! 👨‍💼"
+                );
+
+
+                window.location.href =
+                    "admin.html";
+
+
+            } else {
+
+                alert(
+                    "Invalid Admin Email or Password!"
+                );
+
+            }
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

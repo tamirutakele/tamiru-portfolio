@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Track My Order</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+        }
+
+        nav {
+            background: #2563eb;
+            color: white;
+            padding: 18px 40px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav h2 {
+            font-size: 24px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .box {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+
+            box-shadow:
+                0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .order-info {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .order-info p {
+            margin: 10px 0;
+        }
+
+        .status-title {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .status-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 30px 0;
+        }
+
+        .step {
+            text-align: center;
+            flex: 1;
+            position: relative;
+        }
+
+        .circle {
+            width: 55px;
+            height: 55px;
+
+            margin: auto;
+
+            border-radius: 50%;
+
+            background: #d1d5db;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 24px;
+        }
+
+        .step.active .circle {
+            background: #16a34a;
+            color: white;
+        }
+
+        .step p {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .line {
+            height: 5px;
+            background: #d1d5db;
+            flex: 1;
+        }
+
+        .line.active {
+            background: #16a34a;
+        }
+
+        .status-message {
+            text-align: center;
+
+            padding: 15px;
+
+            background: #e0f2fe;
+
+            color: #0369a1;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+        }
+
+        .buttons {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+
+            padding: 12px 20px;
+
+            margin: 5px;
+
+            background: #2563eb;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 7px;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .empty h2 {
+            color: #dc2626;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 600px) {
+
+            nav {
+                padding: 15px 20px;
+            }
+
+            nav h2 {
+                font-size: 19px;
+            }
+
+            .container {
+                margin: 20px auto;
+                padding: 10px;
+            }
+
+            .box {
+                padding: 20px 15px;
+            }
+
+            .circle {
+                width: 45px;
+                height: 45px;
+                font-size: 19px;
+            }
+
+            .step p {
+                font-size: 12px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- Navigation -->
+
+    <nav>
+
+        <h2>
+            🛒 Online Shop
+        </h2>
+
+    </nav>
+
+
+
+    <div class="container">
+
+        <div class="box">
+
+            <h1>
+                📦 Track My Order
+            </h1>
+
+
+            <!-- Order Information -->
+
+            <div
+                class="order-info"
+                id="orderInfo">
+
+            </div>
+
+
+            <!-- Status -->
+
+            <h2 class="status-title">
+                Order Status
+            </h2>
+
+
+            <div class="status-container">
+
+
+                <!-- Pending -->
+
+                <div
+                    class="step"
+                    id="pendingStep">
+
+                    <div class="circle">
+                        📋
+                    </div>
+
+                    <p>
+                        Pending
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="line"
+                    id="line1">
+                </div>
+
+
+                <!-- Confirmed -->
+
+                <div
+                    class="step"
+                    id="confirmedStep">
+
+                    <div class="circle">
+                        ✓
+                    </div>
+
+                    <p>
+                        Confirmed
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="line"
+                    id="line2">
+                </div>
+
+
+                <!-- Delivered -->
+
+                <div
+                    class="step"
+                    id="deliveredStep">
+
+                    <div class="circle">
+                        🚚
+                    </div>
+
+                    <p>
+                        Delivered
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Status Message -->
+
+            <div
+                class="status-message"
+                id="statusMessage">
+
+                Loading order status...
+
+            </div>
+
+
+            <!-- Buttons -->
+
+            <div class="buttons">
+
+                <a
+                    href="shop.html"
+                    class="btn">
+
+                    🛍️ Continue Shopping
+
+                </a>
+
+                <a
+                    href="cart.html"
+                    class="btn">
+
+                    🛒 View Cart
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+
+        /*
+        ==========================================
+        GET LAST ORDER
+        ==========================================
+        */
+
+        let order = JSON.parse(
+            localStorage.getItem("lastOrder")
+        );
+
+
+        /*
+        ==========================================
+        CHECK ORDER
+        ==========================================
+        */
+
+        if (!order) {
+
+            document.getElementById(
+                "orderInfo"
+            ).innerHTML = `
+
+                <div class="empty">
+
+                    <h2>
+                        ⚠️ No Order Found
+                    </h2>
+
+                    <p>
+                        You don't have a recent order.
+                    </p>
+
+                </div>
+
+            `;
+
+            document.getElementById(
+                "statusMessage"
+            ).innerText =
+                "Please place an order first.";
+
+        }
+
+        else {
+
+
+            /*
+            ======================================
+            ORDER INFORMATION
+            ======================================
+            */
+
+            document.getElementById(
+                "orderInfo"
+            ).innerHTML = `
+
+                <p>
+                    <strong>
+                        Customer:
+                    </strong>
+
+                    ${order.name}
+                </p>
+
+                <p>
+                    <strong>
+                        Phone:
+                    </strong>
+
+                    ${order.phone}
+                </p>
+
+                <p>
+                    <strong>
+                        Address:
+                    </strong>
+
+                    ${order.address}
+                </p>
+
+                <p>
+                    <strong>
+                        Total:
+                    </strong>
+
+                    ${Number(order.total)
+                        .toLocaleString()}
+                    ETB
+                </p>
+
+                <p>
+                    <strong>
+                        Order Date:
+                    </strong>
+
+                    ${order.date}
+                </p>
+
+            `;
+
+
+            /*
+            ======================================
+            GET STATUS
+            ======================================
+            */
+
+            let status =
+                order.status || "Pending";
+
+
+            /*
+            ======================================
+            PENDING
+            ======================================
+            */
+
+            document.getElementById(
+                "pendingStep"
+            ).classList.add("active");
+
+
+            if (status === "Pending") {
+
+                document.getElementById(
+                    "statusMessage"
+                ).innerText =
+                    "📋 Your order is pending. Please wait for confirmation.";
+
+            }
+
+
+            /*
+            ======================================
+            CONFIRMED
+            ======================================
+            */
+
+            if (
+                status === "Confirmed" ||
+                status === "Delivered"
+            ) {
+
+                document.getElementById(
+                    "confirmedStep"
+                ).classList.add("active");
+
+                document.getElementById(
+                    "line1"
+                ).classList.add("active");
+
+            }
+
+
+            if (status === "Confirmed") {
+
+                document.getElementById(
+                    "statusMessage"
+                ).innerText =
+                    "✅ Your order has been confirmed by the admin.";
+
+            }
+
+
+            /*
+            ======================================
+            DELIVERED
+            ======================================
+            */
+
+            if (status === "Delivered") {
+
+                document.getElementById(
+                    "deliveredStep"
+                ).classList.add("active");
+
+                document.getElementById(
+                    "line2"
+                ).classList.add("active");
+
+
+                document.getElementById(
+                    "statusMessage"
+                ).innerText =
+                    "🚚 Your order has been delivered successfully!";
+
+            }
+
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>
